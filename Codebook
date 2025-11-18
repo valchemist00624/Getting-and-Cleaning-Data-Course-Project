@@ -1,0 +1,94 @@
+Codebook by Valerie Madera
+
+The file named “run_analysis.R” is the R code used to perform the 5 assignment steps, with additional steps included for raw data file preparation and creation of variables and variable names.  
+
+1. Loading libraries needed
+o	The following libraries were loaded and used for this project: library(dplyr) & library (data.table). 
+
+2. Download the zip file from the URL and save it in a temporary location
+o	Dataset downloaded and extracted from: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+3. Unzip the file and extract the file to a temporary directory
+o	"UCI HAR Dataset" is the name of the folder created after unzipping the ZIP file
+
+4. Read data using the “read.table” command and add column names
+
+a) Features <- features.txt 
+Composition: 561 observations (rows) & 2 variables (columns)
+Description per original dataset documentation: The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. 
+
+b) Activities_labels <- activity_labels.txt  
+Composition: 6 observations (rows) & 2 variables (columns)
+Description per original dataset documentation: List of activity names performed and their labels (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING).
+
+c) Subject_train <- train, subject_train.txt
+Composition: 7352 observations (rows) & 1 variable (column)
+Description per original dataset documentation: Training data generated from 70% of participating volunteers (21/30 total volunteers).  
+
+d) X_train <- train, X_train.txt 
+Composition: 7352 observations (rows) & 561 variables (columns)
+Description per original dataset documentation: Contains the features recorded in the training data.
+
+e) Y_train <- train, Y_train.txt
+Composition: 7352 observations (rows) & 1 variable (column)
+Description per original dataset documentation: Contains activity code labels recorded in the training data.
+
+f) Subject_test <- test, Subject_test.txt 
+Composition: 2947 observations (rows) & 1 variable (column)
+Description per original dataset documentation: Training data generated from 30% of participating volunteers (9/30 total volunteers).  
+
+g) X_test <- test, X_test.txt 
+Composition: 2947 observations (rows) & 561 variables (columns)
+Description per original dataset documentation: Contains the features recorded in the testing data.
+
+h) Y_test <- test, Y_test.txt
+Composition: 2947 observations (rows) & 1 variable (column)
+Description per original dataset documentation: Contains activity code labels recorded in the testing data.
+
+5. Step 1. Merges the training and the test sets to create one data set
+
+o	Train_data
+Composition: 7352 observations (rows) & 563 variables (columns)
+Description: Dataset created by merging Subject_train, Y_train & X_train by columns (using the command cbind).
+
+o	Test_data
+Composition: 2947 observations (rows) & 563 variables (columns)
+Description: Dataset created by merging Subject_test, Y_test & X_test by columns (using the command cbind).
+
+o	Final_data
+Composition: 10,299 observations (rows) & 563 variables (columns)
+Description: Dataset created by merging Train_data & Test_data by rows (using the command rbind).
+
+6.	Step 2. Extracts only the measurements on the mean and standard deviation for each measurement
+
+o	Final_mean_std
+Composition: 10,299 observations (rows) & 68 variables (columns)
+Description: Dataset created by picking all the columns with names subject, activity_id, mean and std based on Final_data.
+
+7.	Step 3. Uses descriptive activity names to name the activities in the data set
+
+o	Numeric activity IDs from the dataset Final_mean_std were replaced by their corresponding descriptive activity names. 
+
+8.	Step 4. Appropriately labels the data set with descriptive variable names
+
+o	Column named “activity_id” was renamed “activity”
+o	All column names with “Acc” were renamed to “Accelerometer” 
+o	All column names with “Gyro” were renamed to “Gyroscope”
+o	All column names with “BodyBody” were renamed to “Body” 
+o	 All column names with “Mag” were renamed to “Magnitude” 
+o	All column names starting with “t” were renamed to start with “Time” 
+o	All column names starting with “f” were renamed to start with “Frequency” 
+
+9.	Step 5. From the data set in step 4, create a second, independent tidy data set with the average of each variable for each activity and each subject
+
+o	TidyData
+Composition: 180 observations (rows) & 68 variables (columns)
+Description: New tidy dataset “TidyData” contains the mean of each measurement variable for each combination of subject and activity. The dataset is created by first grouping by subject and activity and then calculating the mean for all numeric columns within each group.
+
+10.	 Write to a text file
+
+o	Creating the file named “tidy_data.tx” to be submitted as the final product for the assignment
+
+11.	 Check the tidy dataset
+
+o	Runs additional steps to make sure the dataset is complete and to get the number of columns after merging multiple datasets. 
