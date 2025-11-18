@@ -6,6 +6,7 @@ Dataset: Human Activity Recognition Using Smartphones by UC Irvine
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
 Files included: 
+
 •	The file named “CodeBook.md” is the code book describing all the variables and data created by the 5 assignment steps taken to produce a tidy data set.
 
 •	The file named “run_analysis.R” is the R code used to perform the following 5 assignment steps: 
